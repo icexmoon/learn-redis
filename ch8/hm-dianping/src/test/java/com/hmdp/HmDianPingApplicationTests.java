@@ -124,4 +124,25 @@ class HmDianPingApplicationTests {
         }
     }
 
+    @Test
+    public void testHyperLogLog() {
+        // 模拟100w条数据的插入
+        final int ALL_COUNT = 1000000; // 总插入数据数
+        final int COUNT = 1000; // 单次插入数据数
+        final String KEY = "test:hll2";
+        int userId = 1;
+        do {
+            // 分批插入，每次插入1000条
+            String[] values = new String[COUNT];
+            for (int i = 0; i < COUNT; i++) {
+                values[i] = "user" + userId;
+                userId++;
+            }
+            stringRedisTemplate.opsForHyperLogLog().add(KEY, values);
+        }
+        while (userId <= ALL_COUNT);
+        // 打印结果
+        Long size = stringRedisTemplate.opsForHyperLogLog().size(KEY);
+        log.info(size);
+    }
 }

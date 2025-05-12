@@ -27,4 +27,5 @@ public class RedisConstants {
     public static final String FOLLOW_KEY = "follow:";
     public static final String BLOG_MAILBOX = "blog:mailbox:";
     public static final String SIGN_KEY = "user:sign:";
+    public static final String UV_KEY = "user:uv:";
 }
